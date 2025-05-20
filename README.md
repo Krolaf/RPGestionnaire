@@ -83,6 +83,7 @@ Plateforme web responsive (mobile & desktop) pour gérer des parties de jeu de r
 **Admin**(id, user_id → Utilisateur)
 
 <img src="https://github.com/user-attachments/assets/c8beb658-103f-4182-b905-c787e0a018a0" width="450" alt="UML de mon projet"/>
+<br/>
 ---
 
 ##5. Architecture technique
