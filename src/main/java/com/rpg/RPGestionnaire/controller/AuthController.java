@@ -25,6 +25,7 @@ public class AuthController {
 
     @PostMapping("/register")
     public String register(@ModelAttribute Utilisateur utilisateur, @RequestParam String confirmPassword, Model model) {
+        System.out.println("Tentative inscription : " + utilisateur.getPseudo() + " / " + utilisateur.getEmail());
         // Champs obligatoires
         if (utilisateur.getPseudo() == null || utilisateur.getPseudo().isBlank() ||
             utilisateur.getEmail() == null || utilisateur.getEmail().isBlank() ||
@@ -48,6 +49,12 @@ public class AuthController {
         }
         if (utilisateurService.existsByEmail(utilisateur.getEmail())) {
             model.addAttribute("error", "Cet email est déjà utilisé.");
+            model.addAttribute("roles", new Role[]{Role.MJ, Role.Joueur});
+            return "auth/register";
+        }
+        // Vérification des mots de passe
+        if (!utilisateur.getPasswordHash().equals(confirmPassword)) {
+            model.addAttribute("error", "Les mots de passe ne correspondent pas.");
             model.addAttribute("roles", new Role[]{Role.MJ, Role.Joueur});
             return "auth/register";
         }

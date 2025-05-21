@@ -16,6 +16,7 @@
             <label>Pseudo : <input type="text" th:field="*{pseudo}" required /></label>
             <label>Email : <input type="email" th:field="*{email}" required /></label>
             <label>Mot de passe : <input type="password" th:field="*{passwordHash}" required /></label>
+            <label>Confirmer le mot de passe : <input type="password" name="confirmPassword" required /></label>
             <label>Rôle :
                 <select th:field="*{role}" required>
                     <option th:each="role : ${roles}" th:value="${role}" th:text="${role}"></option>

@@ -28,9 +28,14 @@ public class UtilisateurService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        Utilisateur utilisateur = utilisateurRepository.findByPseudo(username)
-                .orElseThrow(() -> new UsernameNotFoundException("Utilisateur non trouvé: " + username));
-
+        System.out.println("Tentative de connexion avec : " + username);
+        Optional<Utilisateur> byPseudo = utilisateurRepository.findByPseudo(username);
+        Optional<Utilisateur> byEmail = utilisateurRepository.findByEmail(username);
+        System.out.println("Recherche par pseudo : " + byPseudo.map(Utilisateur::getPseudo).orElse("non trouvé"));
+        System.out.println("Recherche par email : " + byEmail.map(Utilisateur::getEmail).orElse("non trouvé"));
+        Utilisateur utilisateur = byPseudo.or(() -> byEmail)
+            .orElseThrow(() -> new UsernameNotFoundException("Utilisateur non trouvé: " + username));
+        System.out.println("Utilisateur trouvé : pseudo=" + utilisateur.getPseudo() + ", hash=" + utilisateur.getPasswordHash());
         return new User(
             utilisateur.getPseudo(),
             utilisateur.getPasswordHash(),
@@ -48,7 +53,10 @@ public class UtilisateurService implements UserDetailsService {
 
     public Utilisateur save(Utilisateur utilisateur) {
         if (utilisateur.getPasswordHash() != null) {
-            utilisateur.setPasswordHash(passwordEncoder.encode(utilisateur.getPasswordHash()));
+            String pwd = utilisateur.getPasswordHash();
+            if (!pwd.startsWith("$2a$") && !pwd.startsWith("$2b$") && !pwd.startsWith("$2y$")) {
+                utilisateur.setPasswordHash(passwordEncoder.encode(pwd));
+            }
         }
         return utilisateurRepository.save(utilisateur);
     }
