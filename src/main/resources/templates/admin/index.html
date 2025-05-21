@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8">
     <title>Backoffice RPGestionnaire</title>
@@ -7,47 +7,39 @@
 </head>
 <body>
     <div th:replace="~{fragments/admin-menu :: adminMenu}"></div>
-    
     <main class="admin-dashboard">
         <h1>Tableau de bord administrateur</h1>
-        
         <div class="admin-grid">
             <div class="admin-card">
                 <h3>Utilisateurs</h3>
                 <p>Gérer les utilisateurs et leurs rôles</p>
                 <a th:href="@{/admin/utilisateurs}" class="btn">Gérer</a>
             </div>
-            
             <div class="admin-card">
                 <h3>Parties</h3>
                 <p>Gérer les parties de jeu</p>
                 <a th:href="@{/admin/parties}" class="btn">Gérer</a>
             </div>
-            
             <div class="admin-card">
                 <h3>Entités</h3>
                 <p>Gérer les entités du jeu</p>
                 <a th:href="@{/admin/entites}" class="btn">Gérer</a>
             </div>
-            
             <div class="admin-card">
                 <h3>Fiches de personnages</h3>
                 <p>Gérer les fiches de personnages</p>
                 <a th:href="@{/admin/fiches}" class="btn">Gérer</a>
             </div>
-            
             <div class="admin-card">
                 <h3>Statistiques</h3>
                 <p>Gérer les statistiques</p>
                 <a th:href="@{/admin/stats}" class="btn">Gérer</a>
             </div>
-            
             <div class="admin-card">
                 <h3>Exports</h3>
                 <p>Gérer les exports</p>
                 <a th:href="@{/admin/exports}" class="btn">Gérer</a>
             </div>
-            
             <div class="admin-card">
                 <h3>Invitations</h3>
                 <p>Gérer les invitations</p>

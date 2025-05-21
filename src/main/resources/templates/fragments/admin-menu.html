@@ -1,1 +1,20 @@
- 
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+    <div th:fragment="adminMenu">
+        <nav class="admin-menu">
+            <ul>
+                <li><a th:href="@{/admin}">Dashboard</a></li>
+                <li><a th:href="@{/admin/utilisateurs}">Utilisateurs</a></li>
+                <li><a th:href="@{/admin/parties}">Parties</a></li>
+                <li><a th:href="@{/admin/entites}">Entités</a></li>
+                <li><a th:href="@{/admin/fiches}">Fiches de personnages</a></li>
+                <li><a th:href="@{/admin/stats}">Statistiques</a></li>
+                <li><a th:href="@{/admin/exports}">Exports</a></li>
+                <li><a th:href="@{/admin/invitations}">Invitations</a></li>
+                <li><a th:href="@{/logout}">Déconnexion</a></li>
+            </ul>
+        </nav>
+    </div>
+</body>
+</html> 

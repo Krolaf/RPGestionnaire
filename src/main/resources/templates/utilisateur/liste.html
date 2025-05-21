@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8">
     <title>Liste des utilisateurs - RPGestionnaire</title>
@@ -19,6 +19,19 @@
                 <li><a th:href="@{/}">Accueil</a></li>
                 <li><a th:href="@{/utilisateurs}">Utilisateurs</a></li>
             </ul>
+            <div style="margin-left:auto; font-weight:bold;">
+                <span sec:authorize="isAuthenticated()">
+                    <span th:if="${#authentication.principal.authorities.?[authority == 'ROLE_Admin'].size() > 0}">
+                        Admin : <span th:text="${#authentication.name}"></span>
+                    </span>
+                    <span th:unless="${#authentication.principal.authorities.?[authority == 'ROLE_Admin'].size() > 0}">
+                        <span th:text="${#authentication.name}"></span>
+                    </span>
+                </span>
+                <span sec:authorize="!isAuthenticated()">
+                    <a th:href="@{/login}">Connexion</a>
+                </span>
+            </div>
         </nav>
     </header>
     <main>

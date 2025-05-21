@@ -226,9 +226,9 @@ main { flex: 1; }
 
 /* Admin Dashboard */
 .admin-dashboard {
-    max-width: 1200px;
-    margin: 2rem auto;
     padding: 0 1rem;
+    display: flex;
+
 }
 
 .admin-dashboard h1 {
@@ -238,7 +238,7 @@ main { flex: 1; }
 }
 
 .admin-grid {
-    display: grid;
+    display: flex;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     gap: 2rem;
 }

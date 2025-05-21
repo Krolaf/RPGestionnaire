@@ -1,32 +1,21 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8">
     <title>Admin - Entité</title>
     <link rel="stylesheet" th:href="@{/css/style.css}" />
 </head>
 <body>
-<header>
-    <nav>
-        <div class="logo">RPGestionnaire - Admin</div>
-        <ul>
-            <li><a th:href="@{/admin/entites}">Entités</a></li>
-            <li><a th:href="@{/admin/parties}">Parties</a></li>
-        </ul>
-    </nav>
-</header>
-<main>
-    <h1 th:text="${entite.id == null} ? 'Ajouter une entité' : 'Éditer l\'entité'"></h1>
-    <form th:action="@{${entite.id == null} ? '/admin/entites/ajouter' : '/admin/entites/editer/' + ${entite.id}}" th:object="${entite}" method="post">
-        <label>Titre : <input type="text" th:field="*{titre}" required /></label>
-        <label>Description : <input type="text" th:field="*{description}" required /></label>
-        <label>Image URL : <input type="text" th:field="*{imageUrl}" /></label>
-        <button type="submit">Enregistrer</button>
-    </form>
-    <a th:href="@{/admin/entites}">Retour à la liste</a>
-</main>
-<footer>
-    <p>&copy; 2025 RPGestionnaire - Admin</p>
-</footer>
+    <div th:replace="~{fragments/admin-menu :: adminMenu}"></div>
+    <main class="admin-dashboard">
+        <h1 th:text="${entite.id == null} ? 'Ajouter une entité' : 'Éditer l\'entité'"></h1>
+        <form th:action="@{${entite.id == null} ? '/admin/entites/ajouter' : '/admin/entites/editer/' + ${entite.id}}" th:object="${entite}" method="post">
+            <label>Titre : <input type="text" th:field="*{titre}" required /></label>
+            <label>Description : <input type="text" th:field="*{description}" required /></label>
+            <label>Image URL : <input type="text" th:field="*{imageUrl}" /></label>
+            <button type="submit">Enregistrer</button>
+        </form>
+        <a th:href="@{/admin/entites}">Retour à la liste</a>
+    </main>
 </body>
 </html> 
