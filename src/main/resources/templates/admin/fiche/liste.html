@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin - Liste des fiches de personnage</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}" />
+</head>
+<body>
+    <div th:replace="~{fragments/admin-menu :: adminMenu}"></div>
+    <main class="admin-dashboard">
+        <h1>Liste des fiches de personnage</h1>
+        <a class="btn" th:href="@{/admin/fiches/ajouter}" style="margin-bottom: 1.5rem; display: inline-block;">Créer une fiche</a>
+        <table>
+            <thead>
+                <tr>
+                    <th>Nom du personnage</th>
+                    <th>Utilisateur</th>
+                    <th>Date de création</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="fiche : ${fiches}">
+                    <td th:text="${fiche.nomPersonnage}"></td>
+                    <td th:text="${fiche.utilisateur != null ? fiche.utilisateur.pseudo : '—'}"></td>
+                    <td th:text="${#dates.format(fiche.dateCreation, 'dd/MM/yyyy')}"></td>
+                    <td>
+                        <a th:href="@{'/admin/fiches/editer/' + ${fiche.id}}" class="btn">Modifier</a>
+                        <a th:href="@{'/admin/fiches/supprimer/' + ${fiche.id}}" class="btn btn-danger" onclick="return confirm('Supprimer cette fiche ?');">Supprimer</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </main>
+</body>
+</html> 

@@ -3,6 +3,7 @@ package com.rpg.RPGestionnaire.entity;
 import jakarta.persistence.*;
 import java.util.*;
 import lombok.*;
+import org.springframework.format.annotation.DateTimeFormat;
 
 @Data
 @NoArgsConstructor
@@ -14,6 +15,7 @@ public class FichePersonnage {
     @GeneratedValue
     private UUID id;
     private String nomPersonnage;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date dateCreation;
     @ManyToOne
     private Utilisateur utilisateur;

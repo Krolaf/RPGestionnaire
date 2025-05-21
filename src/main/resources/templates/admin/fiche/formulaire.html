@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${fichePersonnage.id == null} ? 'Ajouter une fiche' : 'Modifier une fiche'">Fiche</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}" />
+    <style>
+        .stat-block {
+            width: 180px;
+            display: inline-block;
+            margin: 0 16px 16px 0;
+            vertical-align: top;
+            background: #f8f5e6;
+            border: 1px solid #cbbfae;
+            border-radius: 6px;
+            padding: 12px;
+            box-sizing: border-box;
+        }
+        #stats-container {
+            margin-bottom: 1rem;
+            min-height: 120px;
+            width: 100%;
+            overflow-x: auto;
+        }
+        .stat-block label {
+            display: block;
+            font-size: 0.95em;
+            margin-bottom: 6px;
+        }
+        .delete-stat-btn {
+            margin-top: 10px;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <div th:replace="~{fragments/admin-menu :: adminMenu}"></div>
+    <main class="admin-dashboard">
+        <h1 th:text="${fichePersonnage.id == null} ? 'Ajouter une fiche de personnage' : 'Modifier une fiche de personnage'"></h1>
+        <form th:action="@{${fichePersonnage.id == null} ? '/admin/fiches/ajouter' : '/admin/fiches/editer/' + ${fichePersonnage.id}}" th:object="${fichePersonnage}" method="post" style="width:90vw;max-width:90vw;">
+            <label>Nom du personnage : <input type="text" th:field="*{nomPersonnage}" required></label><br><br>
+            <label>Date de création : <input type="date" th:field="*{dateCreation}" required></label><br><br>
+            <label>Utilisateur :
+                <select th:field="*{utilisateur}" required>
+                    <option th:each="u : ${utilisateurs}" th:value="${u.id}" th:text="${u.pseudo}"></option>
+                </select>
+            </label><br><br>
+            <fieldset>
+                <legend>Statistiques (max 10)</legend>
+                <div id="stats-container">
+                    <div class="stat-block">
+                        <label>Nom : <input type="text" name="stats[0].nom" /></label>
+                        <label>Valeur : <input type="number" name="stats[0].valeur" required/></label>
+                        <button type="button" class="delete-stat-btn btn btn-danger" onclick="deleteStat(this)">Supprimer</button>
+                    </div>
+                </div>
+                <button type="button" id="add-stat-btn" class="btn">Ajouter une stat</button>
+            </fieldset>
+            <script>
+                let statIndex = 1;
+                function updateAddButtonVisibility() {
+                    const container = document.getElementById('stats-container');
+                    const addBtn = document.getElementById('add-stat-btn');
+                    if (container.children.length >= 10) {
+                        addBtn.style.display = 'none';
+                    } else {
+                        addBtn.style.display = '';
+                    }
+                }
+                function deleteStat(btn) {
+                    const container = document.getElementById('stats-container');
+                    btn.parentElement.remove();
+                    updateAddButtonVisibility();
+                }
+                document.getElementById('add-stat-btn').addEventListener('click', function() {
+                    const container = document.getElementById('stats-container');
+                    if (container.children.length >= 10) return;
+                    const block = document.createElement('div');
+                    block.className = 'stat-block';
+                    block.innerHTML = `<label>Nom : <input type="text" name="stats[${statIndex}].nom" /></label> <label>Valeur : <input type="number" name="stats[${statIndex}].valeur" required/></label> <button type="button" class="delete-stat-btn btn btn-danger" onclick="deleteStat(this)">Supprimer</button>`;
+                    container.appendChild(block);
+                    statIndex++;
+                    updateAddButtonVisibility();
+                });
+                updateAddButtonVisibility();
+            </script>
+            <button type="submit" class="btn">Enregistrer</button>
+            <a th:href="@{/admin/fiches}" class="btn">Annuler</a>
+        </form>
+    </main>
+</body>
+</html> 
