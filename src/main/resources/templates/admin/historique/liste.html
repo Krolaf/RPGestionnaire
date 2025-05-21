@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Historique des actions</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}" />
+</head>
+<body>
+    <div th:replace="~{fragments/admin-menu :: adminMenu}"></div>
+    <main class="admin-dashboard">
+        <h1>Historique des actions</h1>
+        <table>
+            <thead>
+                <tr>
+                    <th>Date</th>
+                    <th>Utilisateur</th>
+                    <th>Type d'action</th>
+                    <th>Détails</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="action : ${actions}">
+                    <td th:text="${#dates.format(action.dateAction, 'dd/MM/yyyy HH:mm')}"></td>
+                    <td th:text="${action.utilisateurId}"></td>
+                    <td th:text="${action.typeAction}"></td>
+                    <td th:text="${action.details}"></td>
+                </tr>
+            </tbody>
+        </table>
+    </main>
+</body>
+</html> 
