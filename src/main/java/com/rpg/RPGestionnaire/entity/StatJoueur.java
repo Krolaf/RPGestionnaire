@@ -2,7 +2,12 @@ package com.rpg.RPGestionnaire.entity;
 
 import jakarta.persistence.*;
 import java.util.*;
+import lombok.*;
 
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 @Entity
 public class StatJoueur {
     @Id
