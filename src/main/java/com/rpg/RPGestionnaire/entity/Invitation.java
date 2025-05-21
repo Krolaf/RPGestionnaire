@@ -14,5 +14,7 @@ public class Invitation {
     @Enumerated(EnumType.STRING)
     private MethodeInvitation methode;
     private boolean utilise;
+    @ManyToOne
+    private Partie partie;
     // Getters, setters, constructeurs
 } 

@@ -11,5 +11,9 @@ public class Entite {
     private String titre;
     private String description;
     private String imageUrl;
+    @ManyToOne
+    private Partie partie;
+    @OneToMany(mappedBy = "entite")
+    private List<StatEntite> stats;
     // Getters, setters, constructeurs
 } 

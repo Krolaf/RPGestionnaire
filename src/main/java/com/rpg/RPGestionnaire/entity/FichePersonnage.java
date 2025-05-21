@@ -12,5 +12,7 @@ public class FichePersonnage {
     private Date dateCreation;
     @ManyToOne
     private Utilisateur utilisateur;
+    @OneToMany(mappedBy = "fichePersonnage")
+    private List<StatJoueur> stats;
     // Getters, setters, constructeurs
 } 
