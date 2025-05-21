@@ -1,10 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
-<head>
-    <meta charset="UTF-8">
-    <title>Backoffice RPGestionnaire</title>
-    <link rel="stylesheet" th:href="@{/css/backoffice.css}">
-    <link rel="stylesheet" th:href="@{/css/theme.css}">
+<head th:replace="~{fragments/admin-head :: adminHead('Backoffice RPGestionnaire')}">
 </head>
 <body>
     <div th:replace="~{fragments/admin-menu :: adminMenu}"></div>

@@ -1,9 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <title>Historique des actions</title>
-    <link rel="stylesheet" th:href="@{/css/style.css}" />
+<head th:replace="~{fragments/admin-head :: adminHead('Historique des actions')}">
 </head>
 <body>
     <div th:replace="~{fragments/admin-menu :: adminMenu}"></div>

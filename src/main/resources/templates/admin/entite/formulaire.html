@@ -1,9 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
-<head>
-    <meta charset="UTF-8">
-    <title>Admin - Entité</title>
-    <link rel="stylesheet" th:href="@{/css/style.css}" />
+<head th:replace="~{fragments/admin-head :: adminHead('Admin - Entité')}">
 </head>
 <body>
     <div th:replace="~{fragments/admin-menu :: adminMenu}"></div>

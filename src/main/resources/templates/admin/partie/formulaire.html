@@ -1,9 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
-<head>
-    <meta charset="UTF-8">
-    <title th:text="${partie.id == null} ? 'Ajouter une partie' : 'Modifier une partie'">Partie</title>
-    <link rel="stylesheet" th:href="@{/css/style.css}" />
+<head th:replace="~{fragments/admin-head :: adminHead('Admin - Partie')}">
 </head>
 <body>
     <div th:replace="~{fragments/admin-menu :: adminMenu}"></div>

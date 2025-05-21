@@ -1,10 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
-<head>
-    <meta charset="UTF-8">
-    <title>Accueil Joueur/MJ</title>
-    <link rel="stylesheet" th:href="@{/css/fronts.css}" />
-    <link rel="stylesheet" th:href="@{/css/theme.css}" />
+<head th:replace="~{fragments/front-head :: frontHead('Accueil Joueur/MJ')}">
 </head>
 <body>
     <div th:replace="~{fragments/front-menu :: frontMenu}"></div>

@@ -1,37 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
-<head>
-    <meta charset="UTF-8">
-    <title th:text="${fichePersonnage.id == null} ? 'Ajouter une fiche' : 'Modifier une fiche'">Fiche</title>
-    <link rel="stylesheet" th:href="@{/css/style.css}" />
-    <style>
-        .stat-block {
-            width: 180px;
-            display: inline-block;
-            margin: 0 16px 16px 0;
-            vertical-align: top;
-            background: #f8f5e6;
-            border: 1px solid #cbbfae;
-            border-radius: 6px;
-            padding: 12px;
-            box-sizing: border-box;
-        }
-        #stats-container {
-            margin-bottom: 1rem;
-            min-height: 120px;
-            width: 100%;
-            overflow-x: auto;
-        }
-        .stat-block label {
-            display: block;
-            font-size: 0.95em;
-            margin-bottom: 6px;
-        }
-        .delete-stat-btn {
-            margin-top: 10px;
-            width: 100%;
-        }
-    </style>
+<head th:replace="~{fragments/admin-head :: adminHead('Admin - Fiche de personnage')}">
 </head>
 <body>
     <div th:replace="~{fragments/admin-menu :: adminMenu}"></div>
