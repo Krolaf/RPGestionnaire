@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin - Liste des utilisateurs</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}" />
+</head>
+<body>
+    <div th:replace="~{fragments/admin-menu :: adminMenu}"></div>
+    <main class="admin-dashboard">
+        <h1>Liste des utilisateurs (Admin)</h1>
+        <a class="btn" th:href="@{/admin/utilisateurs/ajouter}" style="margin-bottom: 1.5rem; display: inline-block;">Créer un utilisateur</a>
+        <table>
+            <thead>
+                <tr>
+                    <th>Nom</th>
+                    <th>Prénom</th>
+                    <th>Email</th>
+                    <th>Pseudo</th>
+                    <th>Rôle</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="utilisateur : ${utilisateurs}">
+                    <td th:text="${utilisateur.nom}"></td>
+                    <td th:text="${utilisateur.prenom}"></td>
+                    <td th:text="${utilisateur.email}"></td>
+                    <td th:text="${utilisateur.pseudo}"></td>
+                    <td th:text="${utilisateur.role}"></td>
+                    <td>
+                        <a class="btn" th:href="@{'/admin/utilisateurs/editer/' + ${utilisateur.id}}" style="margin-right:0.5rem;">Modifier</a>
+                        <a class="btn" th:href="@{'/admin/utilisateurs/supprimer/' + ${utilisateur.id}}" onclick="return confirm('Supprimer cet utilisateur ?');" style="background:#b71c1c;color:#fff;">Supprimer</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </main>
+</body>
+</html> 

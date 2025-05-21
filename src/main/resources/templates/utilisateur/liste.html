@@ -19,13 +19,16 @@
                 <li><a th:href="@{/}">Accueil</a></li>
                 <li><a th:href="@{/utilisateurs}">Utilisateurs</a></li>
             </ul>
-            <div style="margin-left:auto; font-weight:bold;">
+            <div style="margin-left:auto; font-weight:bold; display: flex; align-items: center; gap: 1rem;">
                 <span sec:authorize="isAuthenticated()">
                     <span th:if="${#authentication.principal.authorities.?[authority == 'ROLE_Admin'].size() > 0}">
                         Admin : <span th:text="${#authentication.name}"></span>
                     </span>
                     <span th:unless="${#authentication.principal.authorities.?[authority == 'ROLE_Admin'].size() > 0}">
                         <span th:text="${#authentication.name}"></span>
+                        <form th:action="@{/logout}" method="post" style="display:inline; margin-left: 1rem;">
+                            <button type="submit" style="background:none;border:none;color:inherit;cursor:pointer;font-weight:bold;">Déconnexion</button>
+                        </form>
                     </span>
                 </span>
                 <span sec:authorize="!isAuthenticated()">

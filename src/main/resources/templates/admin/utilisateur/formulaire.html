@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${utilisateur.id == null} ? 'Ajouter un utilisateur' : 'Modifier un utilisateur'">Utilisateur</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}" />
+</head>
+<body>
+    <div th:replace="~{fragments/admin-menu :: adminMenu}"></div>
+    <main class="admin-dashboard">
+        <h1 th:text="${utilisateur.id == null} ? 'Ajouter un utilisateur' : 'Modifier un utilisateur'"></h1>
+        <form th:action="@{${utilisateur.id == null} ? '/admin/utilisateurs/ajouter' : '/admin/utilisateurs/editer/' + ${utilisateur.id}}" th:object="${utilisateur}" method="post">
+            <label>Nom : <input type="text" th:field="*{nom}" required /></label>
+            <label>Prénom : <input type="text" th:field="*{prenom}" required /></label>
+            <label>Email : <input type="email" th:field="*{email}" required /></label>
+            <label>Pseudo : <input type="text" th:field="*{pseudo}" required /></label>
+            <label>Mot de passe : <input type="password" th:field="*{passwordHash}" th:placeholder="${utilisateur.id != null} ? 'Laisser vide pour ne pas changer' : ''" /></label>
+            <label>Rôle :
+                <select th:field="*{role}">
+                    <option th:each="role : ${T(com.rpg.RPGestionnaire.entity.Role).values()}" th:value="${role}" th:text="${role}"></option>
+                </select>
+            </label>
+            <button type="submit" class="btn" th:text="${utilisateur.id == null} ? 'Créer' : 'Enregistrer'"></button>
+        </form>
+        <a th:href="@{/admin/utilisateurs}">Retour à la liste</a>
+    </main>
+</body>
+</html> 

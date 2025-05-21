@@ -2,13 +2,13 @@
 <html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8">
-    <title>Admin - Partie</title>
+    <title th:text="${partie.id == null} ? 'Ajouter une partie' : 'Modifier une partie'">Partie</title>
     <link rel="stylesheet" th:href="@{/css/style.css}" />
 </head>
 <body>
     <div th:replace="~{fragments/admin-menu :: adminMenu}"></div>
     <main class="admin-dashboard">
-        <h1 th:text="${partie.id == null} ? 'Ajouter une partie' : 'Éditer la partie'"></h1>
+        <h1 th:text="${partie.id == null} ? 'Ajouter une partie' : 'Modifier une partie'"></h1>
         <form th:action="@{${partie.id == null} ? '/admin/parties/ajouter' : '/admin/parties/editer/' + ${partie.id}}" th:object="${partie}" method="post">
             <label>Titre : <input type="text" th:field="*{titre}" required /></label>
             <label>Description : <input type="text" th:field="*{description}" required /></label>
@@ -18,7 +18,7 @@
                     <option th:each="statut : ${T(com.rpg.RPGestionnaire.entity.StatutPartie).values()}" th:value="${statut}" th:text="${statut}"></option>
                 </select>
             </label>
-            <button type="submit">Enregistrer</button>
+            <button type="submit" class="btn" th:text="${partie.id == null} ? 'Créer' : 'Enregistrer'"></button>
         </form>
         <a th:href="@{/admin/parties}">Retour à la liste</a>
     </main>

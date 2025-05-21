@@ -9,7 +9,7 @@
     <div th:replace="~{fragments/admin-menu :: adminMenu}"></div>
     <main class="admin-dashboard">
         <h1>Liste des parties</h1>
-        <a class="btn" th:href="@{/admin/parties/ajouter}">Ajouter une partie</a>
+        <a class="btn" th:href="@{/admin/parties/ajouter}" style="margin-bottom: 1.5rem; display: inline-block;">Créer une partie</a>
         <table>
             <thead>
                 <tr>
@@ -27,8 +27,8 @@
                     <td th:text="${partie.statut}"></td>
                     <td th:text="${partie.mj != null ? partie.mj.pseudo : ''}"></td>
                     <td>
-                        <a th:href="@{'/admin/parties/editer/' + ${partie.id}}">Éditer</a> |
-                        <a th:href="@{'/admin/parties/supprimer/' + ${partie.id}}" onclick="return confirm('Supprimer cette partie ?');">Supprimer</a>
+                        <a class="btn" th:href="@{'/admin/parties/editer/' + ${partie.id}}" style="margin-right:0.5rem;">Modifier</a>
+                        <a class="btn" th:href="@{'/admin/parties/supprimer/' + ${partie.id}}" onclick="return confirm('Supprimer cette partie ?');" style="background:#b71c1c;color:#fff;">Supprimer</a>
                     </td>
                 </tr>
             </tbody>
