@@ -20,5 +20,53 @@ public class Entite {
     private Partie partie;
     @OneToMany(mappedBy = "entite")
     private List<StatEntite> stats;
-    // Getters, setters, constructeurs
+
+    // Getters et Setters
+    public UUID getId() {
+        return id;
+    }
+
+    public void setId(UUID id) {
+        this.id = id;
+    }
+
+    public String getTitre() {
+        return titre;
+    }
+
+    public void setTitre(String titre) {
+        this.titre = titre;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
+    }
+
+    public Partie getPartie() {
+        return partie;
+    }
+
+    public void setPartie(Partie partie) {
+        this.partie = partie;
+    }
+
+    public List<StatEntite> getStats() {
+        return stats;
+    }
+
+    public void setStats(List<StatEntite> stats) {
+        this.stats = stats;
+    }
 } 

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Connexion - RPGestionnaire</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}" />
+</head>
+<body>
+<main>
+    <div class="welcome-card">
+        <h1>Connexion</h1>
+        <form th:action="@{/login}" method="post">
+            <div th:if="${param.error}" style="color: #b71c1c; margin-bottom: 1rem;">
+                Identifiants invalides.
+            </div>
+            <div th:if="${param.logout}" style="color: #388e3c; margin-bottom: 1rem;">
+                Déconnexion réussie.
+            </div>
+            <div th:if="${param.registerSuccess}" style="color: #388e3c; margin-bottom: 1rem;">
+                Inscription réussie, vous pouvez vous connecter.
+            </div>
+            <label>Email ou Pseudo : <input type="text" name="username" required /></label>
+            <label>Mot de passe : <input type="password" name="password" required /></label>
+            <button type="submit">Se connecter</button>
+        </form>
+        <p>Pas encore de compte ? <a th:href="@{/register}">Inscription</a></p>
+    </div>
+</main>
+</body>
+</html> 

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin - Liste des entités</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}" />
+</head>
+<body>
+<header>
+    <nav>
+        <div class="logo">RPGestionnaire - Admin</div>
+        <ul>
+            <li><a th:href="@{/admin/entites}">Entités</a></li>
+            <li><a th:href="@{/admin/parties}">Parties</a></li>
+        </ul>
+    </nav>
+</header>
+<main>
+    <h1>Liste des entités</h1>
+    <a class="btn" th:href="@{/admin/entites/ajouter}">Ajouter une entité</a>
+    <table>
+        <thead>
+            <tr>
+                <th>Titre</th>
+                <th>Description</th>
+                <th>Image</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="entite : ${entites}">
+                <td th:text="${entite.titre}"></td>
+                <td th:text="${entite.description}"></td>
+                <td><img th:src="${entite.imageUrl}" alt="Image" style="max-width:60px;max-height:60px;"></td>
+                <td>
+                    <a th:href="@{'/admin/entites/editer/' + ${entite.id}}">Éditer</a> |
+                    <a th:href="@{'/admin/entites/supprimer/' + ${entite.id}}" onclick="return confirm('Supprimer cette entité ?');">Supprimer</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</main>
+<footer>
+    <p>&copy; 2025 RPGestionnaire - Admin</p>
+</footer>
+</body>
+</html> 

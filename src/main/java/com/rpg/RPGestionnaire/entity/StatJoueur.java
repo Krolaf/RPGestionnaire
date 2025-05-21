@@ -17,5 +17,37 @@ public class StatJoueur {
     private int valeur;
     @ManyToOne
     private FichePersonnage fichePersonnage;
-    // Getters, setters, constructeurs
+
+    // Getters et Setters
+    public UUID getId() {
+        return id;
+    }
+
+    public void setId(UUID id) {
+        this.id = id;
+    }
+
+    public String getNom() {
+        return nom;
+    }
+
+    public void setNom(String nom) {
+        this.nom = nom;
+    }
+
+    public int getValeur() {
+        return valeur;
+    }
+
+    public void setValeur(int valeur) {
+        this.valeur = valeur;
+    }
+
+    public FichePersonnage getFichePersonnage() {
+        return fichePersonnage;
+    }
+
+    public void setFichePersonnage(FichePersonnage fichePersonnage) {
+        this.fichePersonnage = fichePersonnage;
+    }
 } 

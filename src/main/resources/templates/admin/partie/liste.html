@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin - Liste des parties</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}" />
+</head>
+<body>
+<header>
+    <nav>
+        <div class="logo">RPGestionnaire - Admin</div>
+        <ul>
+            <li><a th:href="@{/admin/parties}">Parties</a></li>
+            <li><a th:href="@{/admin/utilisateurs}">Utilisateurs</a></li>
+            <!-- autres liens admin -->
+        </ul>
+    </nav>
+</header>
+<main>
+    <h1>Liste des parties</h1>
+    <a class="btn" th:href="@{/admin/parties/ajouter}">Ajouter une partie</a>
+    <table>
+        <thead>
+            <tr>
+                <th>Titre</th>
+                <th>Description</th>
+                <th>Statut</th>
+                <th>MJ</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="partie : ${parties}">
+                <td th:text="${partie.titre}"></td>
+                <td th:text="${partie.description}"></td>
+                <td th:text="${partie.statut}"></td>
+                <td th:text="${partie.mj != null ? partie.mj.pseudo : ''}"></td>
+                <td>
+                    <a th:href="@{'/admin/parties/editer/' + ${partie.id}}">Éditer</a> |
+                    <a th:href="@{'/admin/parties/supprimer/' + ${partie.id}}" onclick="return confirm('Supprimer cette partie ?');">Supprimer</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</main>
+<footer>
+    <p>&copy; 2025 RPGestionnaire - Admin</p>
+</footer>
+</body>
+</html> 

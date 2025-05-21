@@ -20,5 +20,53 @@ public class Partie {
     private StatutPartie statut;
     @ManyToOne
     private Utilisateur mj;
-    // Getters, setters, constructeurs
+
+    // Getters et Setters
+    public UUID getId() {
+        return id;
+    }
+
+    public void setId(UUID id) {
+        this.id = id;
+    }
+
+    public String getTitre() {
+        return titre;
+    }
+
+    public void setTitre(String titre) {
+        this.titre = titre;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
+    }
+
+    public StatutPartie getStatut() {
+        return statut;
+    }
+
+    public void setStatut(StatutPartie statut) {
+        this.statut = statut;
+    }
+
+    public Utilisateur getMj() {
+        return mj;
+    }
+
+    public void setMj(Utilisateur mj) {
+        this.mj = mj;
+    }
 } 

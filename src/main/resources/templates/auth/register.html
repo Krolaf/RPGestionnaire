@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Inscription - RPGestionnaire</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}" />
+</head>
+<body>
+<main>
+    <div class="welcome-card">
+        <h1>Inscription</h1>
+        <form th:action="@{/register}" th:object="${utilisateur}" method="post">
+            <div th:if="${error}" style="color: #b71c1c; margin-bottom: 1rem;">
+                <span th:text="${error}"></span>
+            </div>
+            <label>Pseudo : <input type="text" th:field="*{pseudo}" required /></label>
+            <label>Email : <input type="email" th:field="*{email}" required /></label>
+            <label>Mot de passe : <input type="password" th:field="*{passwordHash}" required /></label>
+            <label>Rôle :
+                <select th:field="*{role}" required>
+                    <option th:each="role : ${roles}" th:value="${role}" th:text="${role}"></option>
+                </select>
+            </label>
+            <button type="submit">S'inscrire</button>
+        </form>
+        <p>Déjà inscrit ? <a th:href="@{/login}">Connexion</a></p>
+    </div>
+</main>
+</body>
+</html> 
