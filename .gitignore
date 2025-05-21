@@ -31,3 +31,15 @@ build/
 
 ### VS Code ###
 .vscode/
+
+### Application Properties ###
+src/main/resources/application-*.properties
+!src/main/resources/application.properties
+
+### Logs ###
+*.log
+logs/
+
+### OS specific ###
+.DS_Store
+Thumbs.db
