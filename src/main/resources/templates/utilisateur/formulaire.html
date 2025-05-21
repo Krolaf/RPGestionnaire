@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Ajouter un utilisateur - RPGestionnaire</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}" />
+    <link href="https://fonts.googleapis.com/css2?family=UnifrakturCook:wght@700&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        html, body { height: 100%; }
+        body { display: flex; flex-direction: column; min-height: 100vh; }
+        main { flex: 1; }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">RPGestionnaire</div>
+            <ul>
+                <li><a th:href="@{/}">Accueil</a></li>
+                <li><a th:href="@{/utilisateurs}">Utilisateurs</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <section>
+            <h1>Ajouter un utilisateur</h1>
+            <form th:action="@{/utilisateurs/ajouter}" th:object="${utilisateur}" method="post">
+                <label>Nom : <input type="text" th:field="*{nom}" required /></label>
+                <label>Prénom : <input type="text" th:field="*{prenom}" required /></label>
+                <label>Email : <input type="email" th:field="*{email}" required /></label>
+                <label>Pseudo : <input type="text" th:field="*{pseudo}" required /></label>
+                <label>Mot de passe : <input type="password" th:field="*{passwordHash}" required /></label>
+                <label>Rôle :
+                    <select th:field="*{role}">
+                        <option th:each="role : ${T(com.rpg.RPGestionnaire.entity.Role).values()}" th:value="${role}" th:text="${role}"></option>
+                    </select>
+                </label>
+                <button type="submit">Enregistrer</button>
+            </form>
+            <a th:href="@{/utilisateurs}">Retour à la liste</a>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2025 RPGestionnaire - Tous droits réservés</p>
+    </footer>
+</body>
+</html>

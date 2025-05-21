@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Liste des utilisateurs - RPGestionnaire</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}" />
+    <link href="https://fonts.googleapis.com/css2?family=UnifrakturCook:wght@700&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        html, body { height: 100%; }
+        body { display: flex; flex-direction: column; min-height: 100vh; }
+        main { flex: 1; }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">RPGestionnaire</div>
+            <ul>
+                <li><a th:href="@{/}">Accueil</a></li>
+                <li><a th:href="@{/utilisateurs}">Utilisateurs</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <section>
+            <h1>Liste des utilisateurs</h1>
+            <a class="btn" th:href="@{/utilisateurs/ajouter}">Ajouter un utilisateur</a>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Nom</th>
+                        <th>Prénom</th>
+                        <th>Email</th>
+                        <th>Pseudo</th>
+                        <th>Rôle</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="utilisateur : ${utilisateurs}">
+                        <td th:text="${utilisateur.nom}"></td>
+                        <td th:text="${utilisateur.prenom}"></td>
+                        <td th:text="${utilisateur.email}"></td>
+                        <td th:text="${utilisateur.pseudo}"></td>
+                        <td th:text="${utilisateur.role}"></td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2025 RPGestionnaire - Tous droits réservés</p>
+    </footer>
+</body>
+</html> 
