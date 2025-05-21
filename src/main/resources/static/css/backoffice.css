@@ -16,9 +16,9 @@
 
 .admin-card {
   background: var(--color-bg-light);
-  border: 1px solid var(--color-primary);
-  border-radius: 8px;
-  box-shadow: 0 2px 8px #0002;
+  border: 2px solid var(--color-secondary);
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(44, 24, 16, 0.3);
   padding: 2rem 2.5rem;
   min-width: 220px;
   max-width: 320px;
@@ -26,30 +26,56 @@
   flex-direction: column;
   align-items: flex-start;
   gap: 1rem;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.admin-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 6px 16px rgba(44, 24, 16, 0.4);
 }
 
 .admin-card h3 {
   margin: 0 0 0.5rem 0;
+  color: var(--color-primary);
+  border-bottom: 2px solid var(--color-secondary);
+  padding-bottom: 0.5rem;
+  width: 100%;
 }
 
 .admin-menu {
   margin-bottom: 1.5rem;
+  padding: 1rem;
+  background: rgba(60, 36, 21, 0.5);
+  border-radius: 8px;
 }
 
 .admin-table, .admin-dashboard table {
   width: 100%;
-  border-collapse: collapse;
+  border-collapse: separate;
+  border-spacing: 0;
   margin: 1.5rem 0;
+  border-radius: 8px;
+  overflow: hidden;
 }
+
 .admin-table th, .admin-table td, .admin-dashboard th, .admin-dashboard td {
-  border: 1px solid var(--color-primary);
-  padding: 0.6rem 1rem;
+  border: 1px solid var(--color-secondary);
+  padding: 0.8rem 1.2rem;
   text-align: left;
 }
+
 .admin-table th, .admin-dashboard th {
-  background: var(--color-bg-light);
-  color: var(--color-primary);
+  background: var(--color-secondary);
+  color: var(--color-text);
+  font-weight: bold;
+  text-transform: uppercase;
+  font-size: 0.9rem;
 }
+
 .admin-table tr:nth-child(even), .admin-dashboard tr:nth-child(even) {
-  background: #3e3140cc;
+  background: rgba(60, 36, 21, 0.7);
+}
+
+.admin-table tr:hover, .admin-dashboard tr:hover {
+  background: rgba(139, 69, 19, 0.2);
 } 

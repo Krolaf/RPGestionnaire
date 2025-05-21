@@ -1,19 +1,19 @@
 /* theme.css - Thème global RPGestionnaire */
 :root {
-  --color-bg: #2d232e;
-  --color-bg-light: #3e3140;
-  --color-primary: #bfa181;
-  --color-secondary: #7c5e3c;
-  --color-accent: #e0c097;
-  --color-text: #f5f5f5;
-  --color-danger: #b71c1c;
-  --color-success: #4caf50;
+  --color-bg: #2c1810;          /* Dark roasted coffee */
+  --color-bg-light: #3c2415;    /* Medium roasted coffee */
+  --color-primary: #d4b59e;     /* Creamy coffee */
+  --color-secondary: #8b4513;   /* Roasted coffee beans */
+  --color-accent: #c1a173;      /* Coffee with cream */
+  --color-text: #fff5e6;        /* Light cream */
+  --color-danger: #a62f2f;      /* Dark red */
+  --color-success: #4a7023;     /* Forest green */
   --font-title: 'UnifrakturCook', serif;
   --font-main: 'Roboto', Arial, sans-serif;
 }
 
 body {
-  background: var(--color-bg);
+  background: linear-gradient(rgba(155, 87, 42, 0.95), rgba(80, 50, 32, 0.95));
   color: var(--color-text);
   font-family: var(--font-main);
   margin: 0;

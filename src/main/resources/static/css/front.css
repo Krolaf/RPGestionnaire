@@ -8,16 +8,28 @@
 
 .welcome-card {
   background: var(--color-bg-light);
-  border: 1px solid var(--color-accent);
-  border-radius: 10px;
-  box-shadow: 0 2px 8px #0002;
-  padding: 2.5rem 2.5rem;
+  border: 2px solid var(--color-accent);
+  border-radius: 15px;
+  box-shadow: 0 4px 15px rgba(193, 161, 115, 0.2);
+  padding: 2.5rem 3rem;
   min-width: 260px;
   max-width: 420px;
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 1.2rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.welcome-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(to right, var(--color-secondary), var(--color-accent));
 }
 
 .quick-links {
@@ -25,26 +37,48 @@
   gap: 1.2rem;
   flex-wrap: wrap;
   justify-content: center;
+  padding: 1rem;
+  background: rgba(60, 36, 21, 0.3);
+  border-radius: 10px;
+  margin: 1rem 0;
 }
 
 .front-menu {
   margin-bottom: 1.5rem;
+  padding: 1rem 2rem;
+  background: rgba(44, 24, 16, 0.7);
+  border-radius: 10px;
+  border: 1px solid var(--color-accent);
 }
 
 .front-dashboard table {
   width: 100%;
-  border-collapse: collapse;
+  border-collapse: separate;
+  border-spacing: 0;
   margin: 1.5rem 0;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(44, 24, 16, 0.2);
 }
+
 .front-dashboard th, .front-dashboard td {
   border: 1px solid var(--color-accent);
-  padding: 0.6rem 1rem;
+  padding: 0.8rem 1.2rem;
   text-align: left;
 }
+
 .front-dashboard th {
-  background: var(--color-bg-light);
-  color: var(--color-accent);
+  background: var(--color-secondary);
+  color: var(--color-text);
+  font-weight: bold;
+  letter-spacing: 0.5px;
 }
+
 .front-dashboard tr:nth-child(even) {
-  background: #3e3140cc;
+  background: rgba(60, 36, 21, 0.5);
+}
+
+.front-dashboard tr:hover {
+  background: rgba(193, 161, 115, 0.1);
+  transition: background 0.2s;
 } 
