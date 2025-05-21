@@ -24,7 +24,7 @@ public class RpGestionnaireApplication {
 			if (auth != null && auth.isAuthenticated() && auth.getAuthorities().stream().anyMatch(a -> a.getAuthority().equals("ROLE_Admin"))) {
 				return new RedirectView("/admin");
 			}
-			return new RedirectView("/index");
+			return new RedirectView("/front");
 		}
 	}
 

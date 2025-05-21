@@ -1,16 +1,21 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <body>
-    <div th:fragment="adminMenu">
+    <div th:fragment="frontMenu">
         <div style="display:flex;justify-content:space-between;align-items:center;width:100%;">
-            <nav class="admin-menu">
+            <nav class="front-menu">
                 <ul style="margin:0;">
-                    <li><a th:href="@{/admin}">Dashboard</a></li>
-                    <li><a th:href="@{/admin/utilisateurs}">Utilisateurs</a></li>
-                    <li><a th:href="@{/admin/parties}">Parties</a></li>
-                    <li><a th:href="@{/admin/entites}">Entités</a></li>
-                    <li><a th:href="@{/admin/fiches}">Fiches de personnages</a></li>
-                    <li><a th:href="@{/admin/historique}">Historique</a></li>
+                    <li><a th:href="@{/front}">Accueil</a></li>
+                    <li><a th:href="@{/parties}">Parties</a></li>
+                    <li><a th:href="@{/fiches}">Fiches de personnage</a></li>
+                    <!-- Lien MJ uniquement -->
+                    <li sec:authorize="hasAuthority('MJ')">
+                        <a th:href="@{/front/mj-outils}"><i class="fa fa-hat-wizard"></i> Outils MJ</a>
+                    </li>
+                    <!-- Lien Joueur uniquement -->
+                    <li sec:authorize="hasAuthority('JOUEUR')">
+                        <a th:href="@{/front/mes-personnages}"><i class="fa fa-user"></i> Mes personnages</a>
+                    </li>
                 </ul>
             </nav>
             <div style="display:flex;align-items:center;gap:1rem;">
@@ -18,7 +23,7 @@
                     <i class="fa fa-user-circle"></i>
                     <span sec:authentication="name">[Nom]</span>
                 </span>
-                <a th:href="@{/admin/parametres}" title="Paramètres" style="font-size:1.3em;"><i class="fa fa-cog"></i></a>
+                <a th:href="@{/front/parametres}" title="Paramètres" style="font-size:1.3em;"><i class="fa fa-cog"></i></a>
                 <form th:action="@{/logout}" method="post" style="display:inline; margin:0; padding:0;">
                     <button type="submit" title="Déconnexion" style="background:none;border:none;color:inherit;cursor:pointer;font-size:1.3em;"><i class="fa fa-sign-out"></i></button>
                 </form>
@@ -28,6 +33,6 @@
     <!-- FontAwesome CDN for icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
     <link rel="stylesheet" th:href="@{/css/theme.css}" />
-    <link rel="stylesheet" th:href="@{/css/backoffice.css}" />
+    <link rel="stylesheet" th:href="@{/css/front.css}" />
 </body>
 </html> 

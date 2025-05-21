@@ -1,0 +1,50 @@
+/* front.css - Style spécifique front joueur/MJ */
+.front-dashboard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2rem 0;
+}
+
+.welcome-card {
+  background: var(--color-bg-light);
+  border: 1px solid var(--color-accent);
+  border-radius: 10px;
+  box-shadow: 0 2px 8px #0002;
+  padding: 2.5rem 2.5rem;
+  min-width: 260px;
+  max-width: 420px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.2rem;
+}
+
+.quick-links {
+  display: flex;
+  gap: 1.2rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.front-menu {
+  margin-bottom: 1.5rem;
+}
+
+.front-dashboard table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1.5rem 0;
+}
+.front-dashboard th, .front-dashboard td {
+  border: 1px solid var(--color-accent);
+  padding: 0.6rem 1rem;
+  text-align: left;
+}
+.front-dashboard th {
+  background: var(--color-bg-light);
+  color: var(--color-accent);
+}
+.front-dashboard tr:nth-child(even) {
+  background: #3e3140cc;
+} 
