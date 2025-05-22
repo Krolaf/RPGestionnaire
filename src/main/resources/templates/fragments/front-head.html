@@ -10,6 +10,18 @@
 <body>
     <header>
         <div class="logo">RPGestionnaire</div>
+        <div class="header-user">
+            <div class="header-user-info">
+                <i class="fas fa-user-shield"></i>
+                <span class="header-user-name" th:text="${session.user?.username}">MJ</span>
+            </div>
+            <div class="header-actions">
+                <a th:href="@{/parametres}" class="btn"><i class="fas fa-cog"></i> Paramètres</a>
+                <form th:action="@{/logout}" method="post" style="display:inline; margin:0; padding:0;">
+                    <button type="submit" class="btn"><i class="fas fa-sign-out-alt"></i> Déconnexion</button>
+                </form>
+            </div>
+        </div>
     </header>
 </body>
 </html>

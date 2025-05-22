@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Paramètres du compte</title>
+    <link rel="stylesheet" th:href="@{/css/theme.css}" />
+</head>
+<body>
+    <header th:replace="~{fragments/front-head :: frontHead('Paramètres')}"></header>
+    <main class="parametres-container">
+        <h1>Paramètres du compte</h1>
+        <div th:if="${success}" class="alert alert-success" th:text="${success}"></div>
+        <div th:if="${error}" class="alert alert-danger" th:text="${error}"></div>
+        <div class="user-info">
+            <p><strong>Pseudo :</strong> <span th:text="${utilisateur.pseudo}"></span></p>
+            <p><strong>Email :</strong> <span th:text="${utilisateur.email}"></span></p>
+        </div>
+        <form th:action="@{/parametres/modifier}" method="post">
+            <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+            <label for="email">Nouvel email :</label>
+            <input type="email" id="email" name="email" th:value="${utilisateur.email}" required /><br/>
+            <label for="password">Nouveau mot de passe :</label>
+            <input type="password" id="password" name="password" placeholder="Laisser vide pour ne pas changer" /><br/>
+            <button type="submit">Enregistrer les modifications</button>
+        </form>
+        <hr/>
+        <button onclick="showModal('deleteAccountModal')" class="btn btn-danger">Supprimer le compte</button>
+        <!-- Modal de confirmation suppression -->
+        <div id="deleteAccountModal" class="modal">
+            <div class="modal-content">
+                <h2>Confirmer la suppression du compte</h2>
+                <form th:action="@{/parametres/supprimer}" method="post">
+                    <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+                    <label>Mot de passe :</label>
+                    <input type="password" name="passwordConfirm" required /><br/>
+                    <label>Écrivez <b>detruire le compte</b> pour confirmer :</label>
+                    <input type="text" name="confirmation" required /><br/>
+                    <button type="submit" class="btn btn-danger">Confirmer la suppression</button>
+                    <button type="button" class="btn" onclick="hideModal('deleteAccountModal')">Annuler</button>
+                </form>
+            </div>
+        </div>
+    </main>
+    <script>
+    function showModal(id) {
+        document.getElementById(id).style.display = 'block';
+    }
+    function hideModal(id) {
+        document.getElementById(id).style.display = 'none';
+    }
+    </script>
+</body>
+</html> 
