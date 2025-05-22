@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/front-head :: frontHead('Partie en cours')}">
+</head>
+<body>
+    <header>
+        <div class="logo">RPGestionnaire</div>
+        <div class="header-user">
+            <div class="header-user-info">
+                <i th:class="${isGM ? 'fas fa-user-shield' : 'fas fa-user'}"></i>
+                <span class="header-user-name" th:text="${session.user?.username}">Utilisateur</span>
+            </div>
+            <div class="header-actions">
+                <a th:href="@{/parametres}" class="btn"><i class="fas fa-cog"></i> Paramètres</a>
+                <form th:action="@{/logout}" method="post" style="display:inline; margin:0; padding:0;">
+                    <button type="submit" class="btn"><i class="fas fa-sign-out-alt"></i> Déconnexion</button>
+                </form>
+            </div>
+        </div>
+    </header>
+
+    <main class="game-view">
+        <div class="game-header">
+            <h1 th:text="${game.name}">Nom de la partie</h1>
+            <div class="game-controls">
+                <button class="btn" onclick="toggleSidebar()">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </div>
+
+        <div class="game-layout">
+            <!-- Sidebar -->
+            <aside class="game-sidebar" id="gameSidebar">
+                <div class="sidebar-section">
+                    <h3>Participants</h3>
+                    <div class="participants-list">
+                        <div th:each="participant : ${participants}" class="participant-item">
+                            <i th:class="${participant.isGM ? 'fas fa-user-shield' : 'fas fa-user'}"></i>
+                            <span th:text="${participant.name}">Nom du participant</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Section MJ uniquement -->
+                <div class="sidebar-section" th:if="${isGM}">
+                    <h3>Outils MJ</h3>
+                    <div class="gm-tools">
+                        <button class="btn" onclick="showDiceRoller()">
+                            <i class="fas fa-dice"></i> Lancer de dés
+                        </button>
+                        <button class="btn" onclick="showNotes()">
+                            <i class="fas fa-sticky-note"></i> Notes
+                        </button>
+                        <button class="btn" onclick="showEntities()">
+                            <i class="fas fa-dragon"></i> Entités
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Section Joueur uniquement -->
+                <div class="sidebar-section" th:unless="${isGM}">
+                    <h3>Mon Personnage</h3>
+                    <div class="character-sheet">
+                        <h4 th:text="${character.name}">Nom du personnage</h4>
+                        <div class="character-stats">
+                            <!-- Stats du personnage -->
+                        </div>
+                    </div>
+                </div>
+            </aside>
+
+            <!-- Zone principale -->
+            <div class="game-main">
+                <div class="game-content">
+                    <!-- Contenu de la partie -->
+                    <div class="game-chat">
+                        <div class="chat-messages" id="chatMessages">
+                            <!-- Messages du chat -->
+                        </div>
+                        <div class="chat-input">
+                            <input type="text" placeholder="Votre message..." id="chatInput">
+                            <button class="btn" onclick="sendMessage()">
+                                <i class="fas fa-paper-plane"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Modals -->
+    <div id="diceRollerModal" class="modal">
+        <!-- Contenu du modal de lancer de dés -->
+    </div>
+
+    <div id="notesModal" class="modal">
+        <!-- Contenu du modal de notes -->
+    </div>
+
+    <div id="entitiesModal" class="modal">
+        <!-- Contenu du modal d'entités -->
+    </div>
+
+    <script th:src="@{/js/game.js}"></script>
+</body>
+</html> 

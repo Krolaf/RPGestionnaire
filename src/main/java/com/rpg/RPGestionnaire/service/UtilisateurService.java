@@ -72,4 +72,8 @@ public class UtilisateurService implements UserDetailsService {
     public boolean existsByEmail(String email) {
         return utilisateurRepository.findByEmail(email).isPresent();
     }
+
+    public Optional<Utilisateur> findByPseudo(String pseudo) {
+        return utilisateurRepository.findByPseudo(pseudo);
+    }
 } 

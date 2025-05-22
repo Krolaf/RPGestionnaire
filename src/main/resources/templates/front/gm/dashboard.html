@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/front-head :: frontHead('Dashboard MJ')}">
+</head>
+<body>
+    <header>
+        <div class="logo">RPGestionnaire</div>
+        <div class="header-user">
+            <div class="header-user-info">
+                <i class="fas fa-user-shield"></i>
+                <span class="header-user-name" th:text="${session.user?.username}">MJ</span>
+            </div>
+            <div class="header-actions">
+                <a th:href="@{/parametres}" class="btn"><i class="fas fa-cog"></i> Paramètres</a>
+                <form th:action="@{/logout}" method="post" style="display:inline; margin:0; padding:0;">
+                    <button type="submit" class="btn"><i class="fas fa-sign-out-alt"></i> Déconnexion</button>
+                </form>
+            </div>
+        </div>
+    </header>
+
+    <main class="gm-dashboard">
+        <div class="dashboard-tabs">
+            <div class="tab-header">
+                <button class="tab-btn active" data-tab="games">Parties</button>
+                <button class="tab-btn" data-tab="entities">Entités</button>
+            </div>
+            
+            <div class="tab-content">
+                <!-- Onglet Parties -->
+                <div class="tab-pane active" id="games">
+                    <div class="action-bar">
+                        <button class="btn btn-primary" onclick="showModal('createGameModal')">
+                            <i class="fas fa-plus"></i> Nouvelle Partie
+                        </button>
+                    </div>
+                    <div class="games-list">
+                        <div th:each="game : ${games}" class="game-card">
+                            <h3 th:text="${game.titre}">Nom de la partie</h3>
+                            <p th:text="${game.description}">Description</p>
+                            <div class="game-actions">
+                                <a th:href="@{/game/{id}(id=${game.id})}" class="btn">
+                                    <i class="fas fa-play"></i> Jouer
+                                </a>
+                                <button class="btn" onclick="openEditGameModal(this)"
+                                        th:data-game-id="${game.id}"
+                                        th:data-game-titre="${game.titre}"
+                                        th:data-game-description="${game.description}"
+                                        th:data-game-imageUrl="${game.imageUrl}"
+                                        th:data-game-statut="${game.statut}">
+                                    <i class="fas fa-edit"></i> Modifier
+                                </button>
+                                <a th:href="@{/front/gm/parties/supprimer/{id}(id=${game.id})}" class="btn btn-danger">Supprimer</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Onglet Entités -->
+                <div class="tab-pane" id="entities">
+                    <div class="action-bar">
+                        <button class="btn btn-primary" onclick="showModal('createEntityModal')">
+                            <i class="fas fa-plus"></i> Nouvelle Entité
+                        </button>
+                    </div>
+                    <div class="entities-list">
+                        <div th:each="entity : ${entities}" class="entity-card">
+                            <h3 th:text="${entity.titre}">Nom de l'entité</h3>
+                            <p th:text="${entity.description}">Description</p>
+                            <div class="entity-actions">
+                                <button class="btn" onclick="openEditEntityModal(this)" 
+                                        th:data-entity-id="${entity.id}"
+                                        th:data-entity-titre="${entity.titre}"
+                                        th:data-entity-description="${entity.description}">
+                                    <i class="fas fa-edit"></i> Modifier
+                                </button>
+                                <a th:href="@{/front/gm/entites/supprimer/{id}(id=${entity.id})}" class="btn btn-danger">
+                                    <i class="fas fa-trash"></i> Supprimer
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Modals -->
+    <div id="createGameModal" class="modal">
+        <div class="modal-content">
+            <h2>Nouvelle Partie</h2>
+            <form th:action="@{/front/gm/parties/ajouter}" th:object="${newPartie}" method="post">
+                <label>Nom : <input type="text" th:field="*{titre}" required /></label><br>
+                <label>Description : <textarea th:field="*{description}" required></textarea></label><br>
+                <button type="submit" class="btn btn-primary">Enregistrer</button>
+                <button type="button" class="btn" onclick="hideModal('createGameModal')">Annuler</button>
+            </form>
+        </div>
+    </div>
+
+    <div id="createEntityModal" class="modal">
+        <div class="modal-content">
+            <h2>Nouvelle Entité</h2>
+            <form th:action="@{/front/gm/entites/ajouter}" th:object="${newEntite}" method="post">
+                <label>Nom : <input type="text" th:field="*{titre}" required /></label><br>
+                <label>Description : <input type="text" th:field="*{description}" required /></label><br>
+                <button type="submit" class="btn btn-primary">Enregistrer</button>
+                <button type="button" class="btn" onclick="hideModal('createEntityModal')">Annuler</button>
+            </form>
+        </div>
+    </div>
+
+    <div id="editEntityModal" class="modal">
+        <div class="modal-content">
+            <h2>Éditer l'entité</h2>
+            <form id="editEntityForm" method="post">
+                <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+                <input type="hidden" name="id" id="edit-entity-id" />
+                <label>Nom : <input type="text" name="titre" id="edit-entity-titre" required /></label><br>
+                <label>Description : <input type="text" name="description" id="edit-entity-description" required /></label><br>
+                <button type="submit" class="btn btn-primary">Enregistrer</button>
+                <button type="button" class="btn" onclick="hideModal('editEntityModal')">Annuler</button>
+            </form>
+        </div>
+    </div>
+
+    <div id="editGameModal" class="modal">
+        <div class="modal-content">
+            <h2>Éditer la partie</h2>
+            <form id="editGameForm" method="post">
+                <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+                <input type="hidden" name="id" id="edit-game-id" />
+                <label>Titre : <input type="text" name="titre" id="edit-game-titre" required /></label><br>
+                <label>Description : <textarea name="description" id="edit-game-description" required></textarea></label><br>
+                <label>Image URL : <input type="text" name="imageUrl" id="edit-game-imageUrl" /></label><br>
+                <label>Statut : <input type="text" name="statut" id="edit-game-statut" /></label><br>
+                <button type="submit" class="btn btn-primary">Enregistrer</button>
+                <button type="button" class="btn" onclick="hideModal('editGameModal')">Annuler</button>
+            </form>
+        </div>
+    </div>
+
+    <script th:src="@{/js/gm-dashboard.js}"></script>
+    <script>
+    function openEditEntityModal(btn) {
+        const id = btn.getAttribute('data-entity-id');
+        const titre = btn.getAttribute('data-entity-titre');
+        const description = btn.getAttribute('data-entity-description');
+        document.getElementById('edit-entity-id').value = id;
+        document.getElementById('edit-entity-titre').value = titre;
+        document.getElementById('edit-entity-description').value = description;
+        document.getElementById('editEntityForm').action = `/front/gm/entites/editer/${id}`;
+        showModal('editEntityModal');
+    }
+
+    function openEditGameModal(btn) {
+        const id = btn.getAttribute('data-game-id');
+        const titre = btn.getAttribute('data-game-titre');
+        const description = btn.getAttribute('data-game-description');
+        const imageUrl = btn.getAttribute('data-game-imageUrl');
+        const statut = btn.getAttribute('data-game-statut');
+        document.getElementById('edit-game-id').value = id;
+        document.getElementById('edit-game-titre').value = titre;
+        document.getElementById('edit-game-description').value = description;
+        document.getElementById('edit-game-imageUrl').value = imageUrl;
+        document.getElementById('edit-game-statut').value = statut;
+        document.getElementById('editGameForm').action = `/front/gm/parties/editer/${id}`;
+        showModal('editGameModal');
+    }
+
+    // Active le bon onglet selon le paramètre ?tab= dans l'URL
+    document.addEventListener('DOMContentLoaded', function() {
+        const urlParams = new URLSearchParams(window.location.search);
+        const tab = urlParams.get('tab');
+        if (tab) {
+            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+            document.querySelectorAll('.tab-pane').forEach(pane => pane.classList.remove('active'));
+            const btn = document.querySelector(`.tab-btn[data-tab="${tab}"]`);
+            const pane = document.getElementById(tab);
+            if (btn && pane) {
+                btn.classList.add('active');
+                pane.classList.add('active');
+            }
+        }
+    });
+    </script>
+</body>
+</html> 

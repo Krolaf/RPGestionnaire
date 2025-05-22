@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Édition Partie</title>
+</head>
+<body>
+    <h1>Éditer la partie</h1>
+    <form th:action="@{'/front/gm/parties/editer/' + ${partie.id}}" th:object="${partie}" method="post">
+        <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+        <label for="titre">Titre :</label>
+        <input type="text" id="titre" name="titre" th:field="*{titre}" required /><br/>
+        <label for="description">Description :</label>
+        <textarea id="description" name="description" th:field="*{description}"></textarea><br/>
+        <label for="imageUrl">Image URL :</label>
+        <input type="text" id="imageUrl" name="imageUrl" th:field="*{imageUrl}" /><br/>
+        <label for="statut">Statut :</label>
+        <input type="text" id="statut" name="statut" th:field="*{statut}" /><br/>
+        <button type="submit">Enregistrer</button>
+        <a th:href="@{/front/gm/dashboard?tab=games}">Annuler</a>
+    </form>
+</body>
+</html> 

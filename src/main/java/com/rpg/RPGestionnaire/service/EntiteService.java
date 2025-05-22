@@ -26,4 +26,9 @@ public class EntiteService {
     public void deleteById(UUID id) {
         entiteRepository.deleteById(id);
     }
+
+    public List<Entite> findByGmUsername(String username) {
+        // À adapter selon la structure de l'entité (ex: champ createur ou mj)
+        return entiteRepository.findAll(); // TODO: filtrer par MJ si la structure le permet
+    }
 } 

@@ -26,4 +26,10 @@ public class PartieService {
     public void deleteById(UUID id) {
         partieRepository.deleteById(id);
     }
+
+    public List<Partie> findByGmUsername(String username) {
+        return partieRepository.findAll().stream()
+            .filter(p -> p.getMj() != null && username.equals(p.getMj().getPseudo()))
+            .toList();
+    }
 } 
