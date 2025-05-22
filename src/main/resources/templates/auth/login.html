@@ -6,10 +6,10 @@
     <link rel="stylesheet" th:href="@{/css/theme.css}" />
 </head>
 <body>
-<main>
+<main class="welcome-main">
     <div class="welcome-card">
         <h1>Connexion</h1>
-        <form th:action="@{/login}" method="post">
+        <form class="welcome-form" th:action="@{/login}" method="post">
             <div th:if="${param.error}" style="color: #b71c1c; margin-bottom: 1rem;">
                 Identifiants invalides.
             </div>
@@ -20,7 +20,9 @@
                 Inscription réussie, vous pouvez vous connecter.
             </div>
             <label>Email ou Pseudo : <input type="text" name="username" required /></label>
+            <br>
             <label>Mot de passe : <input type="password" name="password" required /></label>
+            <br>
             <button type="submit">Se connecter</button>
         </form>
         <p>Pas encore de compte ? <a th:href="@{/register}">Inscription</a></p>

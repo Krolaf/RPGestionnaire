@@ -27,7 +27,40 @@ header, nav {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  width: 100%;
+  box-sizing: border-box;
 }
+
+/* Authentication */
+.welcome-main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.welcome-card {
+  background: var(--color-bg-light);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: var(--color-primary);
+  width: 50vw;
+  padding: 2rem;
+  margin-top: 2rem;
+  border-radius: 10px;
+}
+.welcome-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.fa-cog {
+  color: var(--color-primary);
+} 
 
 .logo {
   font-family: var(--font-title);
@@ -98,4 +131,31 @@ input, select, textarea {
 ::-webkit-scrollbar-thumb {
   background: var(--color-primary);
   border-radius: 4px;
+}
+
+.header-user {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.header-user-info {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.header-user-name {
+  color: var(--color-text);
+  font-weight: bold;
+}
+
+.header-actions {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.header-actions .btn {
+  padding: 0.4rem 0.8rem;
+  font-size: 0.9rem;
 } 

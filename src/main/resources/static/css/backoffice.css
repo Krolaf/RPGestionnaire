@@ -46,7 +46,7 @@
   margin-bottom: 1.5rem;
   padding: 1rem;
   background: rgba(60, 36, 21, 0.5);
-  border-radius: 8px;
+  border: 1px solid var(--color-accent);
 }
 
 .admin-table, .admin-dashboard table {
