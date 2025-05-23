@@ -6,8 +6,6 @@
             <nav class="front-menu">
                 <ul style="margin:0;">
                     <li><a th:href="@{/front}">Accueil</a></li>
-                    <li><a th:href="@{/parties}">Parties</a></li>
-                    <li><a th:href="@{/fiches}">Fiches de personnage</a></li>
                     <!-- Lien MJ uniquement -->
                     <li sec:authorize="hasAuthority('MJ')">
                         <a th:href="@{/front/mj-outils}"><i class="fa fa-hat-wizard"></i> Outils MJ</a>

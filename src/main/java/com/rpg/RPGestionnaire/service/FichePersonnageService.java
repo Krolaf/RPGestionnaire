@@ -26,4 +26,8 @@ public class FichePersonnageService {
     public void deleteById(UUID id) {
         fichePersonnageRepository.deleteById(id);
     }
+
+    public List<FichePersonnage> findByUtilisateurPseudo(String pseudo) {
+        return fichePersonnageRepository.findByUtilisateur_Pseudo(pseudo);
+    }
 } 

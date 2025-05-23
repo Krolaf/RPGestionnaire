@@ -141,6 +141,14 @@
     justify-content: flex-end;
 }
 
+/* Dashboard Player */
+.player-dashboard {
+    padding: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+
 /* Cards */
 .games-list, .entities-list {
     display: grid;

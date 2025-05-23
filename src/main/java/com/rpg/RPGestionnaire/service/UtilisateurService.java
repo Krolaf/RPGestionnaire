@@ -39,7 +39,7 @@ public class UtilisateurService implements UserDetailsService {
         return new User(
             utilisateur.getPseudo(),
             utilisateur.getPasswordHash(),
-            Collections.singletonList(new SimpleGrantedAuthority("ROLE_" + utilisateur.getRole().name()))
+            Collections.singletonList(new SimpleGrantedAuthority("ROLE_" + utilisateur.getRole().name().toUpperCase()))
         );
     }
 
