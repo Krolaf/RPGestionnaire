@@ -22,6 +22,11 @@ public class SecurityConfig {
         http
             .authorizeHttpRequests(auth -> auth
                 .requestMatchers("/register", "/login", "/css/**", "/js/**", "/images/**").permitAll()
+                .requestMatchers("/entites/admin/**").hasAuthority("ROLE_ADMIN")
+                .requestMatchers("/entites/gm/**").hasAuthority("ROLE_MJ")
+                .requestMatchers("/parties/admin/**").hasAuthority("ROLE_ADMIN")
+                .requestMatchers("/parties/gm/**").hasAuthority("ROLE_MJ")
+                .requestMatchers("/parties/player/**").hasAuthority("ROLE_JOUEUR")
                 .requestMatchers("/admin/**").hasAuthority("ROLE_ADMIN")
                 .requestMatchers("/front/gm/**").hasAuthority("ROLE_MJ")
                 .requestMatchers("/front/player/**").hasAuthority("ROLE_JOUEUR")

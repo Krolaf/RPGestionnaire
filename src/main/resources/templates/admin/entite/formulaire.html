@@ -7,6 +7,7 @@
     <main class="admin-dashboard">
         <h1 th:text="${entite.id == null} ? 'Ajouter une entité' : 'Éditer l\'entité'"></h1>
         <form th:action="@{${entite.id == null} ? '/admin/entites/ajouter' : '/admin/entites/editer/' + ${entite.id}}" th:object="${entite}" method="post">
+            <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
             <label>Titre : <input type="text" th:field="*{titre}" required /></label>
             <label>Description : <input type="text" th:field="*{description}" required /></label>
             <label>Image URL : <input type="text" th:field="*{imageUrl}" /></label>

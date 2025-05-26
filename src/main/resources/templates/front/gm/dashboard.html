@@ -73,7 +73,7 @@
                                         th:data-entity-description="${entity.description}">
                                     <i class="fas fa-edit"></i> Modifier
                                 </button>
-                                <a th:href="@{/front/gm/entites/supprimer/{id}(id=${entity.id})}" class="btn btn-danger">
+                                <a th:href="@{/entites/gm/supprimer/{id}(id=${entity.id})}" class="btn btn-danger">
                                     <i class="fas fa-trash"></i> Supprimer
                                 </a>
                             </div>
@@ -88,7 +88,8 @@
     <div id="createGameModal" class="modal">
         <div class="modal-content">
             <h2>Nouvelle Partie</h2>
-            <form th:action="@{/front/gm/parties/ajouter}" th:object="${newPartie}" method="post">
+            <form th:action="@{/parties/gm/ajouter}" th:object="${newPartie}" method="post">
+                <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
                 <label>Nom : <input type="text" th:field="*{titre}" required /></label><br>
                 <label>Description : <textarea th:field="*{description}" required></textarea></label><br>
                 <button type="submit" class="btn btn-primary">Enregistrer</button>
@@ -100,7 +101,8 @@
     <div id="createEntityModal" class="modal">
         <div class="modal-content">
             <h2>Nouvelle Entité</h2>
-            <form th:action="@{/front/gm/entites/ajouter}" th:object="${newEntite}" method="post">
+            <form th:action="@{/entites/gm/ajouter}" th:object="${newEntite}" method="post">
+                <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
                 <label>Nom : <input type="text" th:field="*{titre}" required /></label><br>
                 <label>Description : <input type="text" th:field="*{description}" required /></label><br>
                 <button type="submit" class="btn btn-primary">Enregistrer</button>
@@ -148,7 +150,7 @@
         document.getElementById('edit-entity-id').value = id;
         document.getElementById('edit-entity-titre').value = titre;
         document.getElementById('edit-entity-description').value = description;
-        document.getElementById('editEntityForm').action = `/front/gm/entites/editer/${id}`;
+        document.getElementById('editEntityForm').action = `/entites/gm/editer/${id}`;
         showModal('editEntityModal');
     }
 
@@ -163,7 +165,7 @@
         document.getElementById('edit-game-description').value = description;
         document.getElementById('edit-game-imageUrl').value = imageUrl;
         document.getElementById('edit-game-statut').value = statut;
-        document.getElementById('editGameForm').action = `/front/gm/parties/editer/${id}`;
+        document.getElementById('editGameForm').action = `/parties/gm/editer/${id}`;
         showModal('editGameModal');
     }
 

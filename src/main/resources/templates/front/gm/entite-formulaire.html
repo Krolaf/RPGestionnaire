@@ -5,7 +5,7 @@
 </head>
 <body>
     <h1>Edition d'une entité</h1>
-    <form th:action="@{'/front/gm/entites/editer/' + ${entite.id}}" th:object="${entite}" method="post">
+    <form th:action="@{'/entites/gm/editer/' + ${entite.id}}" th:object="${entite}" method="post">
         <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
         <label for="titre">Titre :</label>
         <input type="text" id="titre" name="titre" th:field="*{titre}" required />

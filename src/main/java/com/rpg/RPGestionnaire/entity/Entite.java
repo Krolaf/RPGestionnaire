@@ -18,6 +18,8 @@ public class Entite {
     private String imageUrl;
     @ManyToOne
     private Partie partie;
+    @ManyToOne
+    private Utilisateur createur;
     @OneToMany(mappedBy = "entite")
     private List<StatEntite> stats;
 
@@ -60,6 +62,14 @@ public class Entite {
 
     public void setPartie(Partie partie) {
         this.partie = partie;
+    }
+
+    public Utilisateur getCreateur() {
+        return createur;
+    }
+
+    public void setCreateur(Utilisateur createur) {
+        this.createur = createur;
     }
 
     public List<StatEntite> getStats() {

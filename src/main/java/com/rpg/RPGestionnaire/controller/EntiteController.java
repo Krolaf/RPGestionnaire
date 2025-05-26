@@ -1,9 +1,10 @@
 package com.rpg.RPGestionnaire.controller;
 
-import com.rpg.RPGestionnaire.entity.Partie;
-import com.rpg.RPGestionnaire.service.PartieService;
+import com.rpg.RPGestionnaire.entity.Entite;
+import com.rpg.RPGestionnaire.service.EntiteService;
 import com.rpg.RPGestionnaire.service.UtilisateurService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,91 +12,91 @@ import org.springframework.web.bind.annotation.*;
 import java.util.UUID;
 
 @Controller
-public class PartieController {
+public class EntiteController {
     @Autowired
-    private PartieService partieService;
+    private EntiteService entiteService;
     @Autowired
     private UtilisateurService utilisateurService;
 
-    // Liste des parties (admin ou GM)
-    @GetMapping({"/admin/parties", "/parties/gm"})
+    // Liste des entités (admin ou GM)
+    @GetMapping({"/admin/entites", "/entites/gm"})
     public String liste(Model model, Authentication auth) {
         if (auth.getAuthorities().stream().anyMatch(a -> a.getAuthority().equals("ROLE_ADMIN"))) {
-            model.addAttribute("parties", partieService.findAll());
-            return "admin/partie/liste";
+            model.addAttribute("entites", entiteService.findAll());
+            return "admin/entite/liste";
         } else if (auth.getAuthorities().stream().anyMatch(a -> a.getAuthority().equals("ROLE_MJ"))) {
             String username = auth.getName();
-            model.addAttribute("parties", partieService.findByGmUsername(username));
+            model.addAttribute("entites", entiteService.findByGmUsername(username));
             return "front/gm/dashboard"; // ou un template dédié GM si besoin
         }
         return "error/403";
     }
 
     // Formulaire ajout
-    @GetMapping({"/admin/parties/ajouter", "/parties/gm/ajouter"})
+    @GetMapping({"/admin/entites/ajouter", "/entites/gm/ajouter"})
     public String formulaireAjout(Model model, Authentication auth) {
-        model.addAttribute("partie", new Partie());
+        model.addAttribute("entite", new Entite());
         if (auth.getAuthorities().stream().anyMatch(a -> a.getAuthority().equals("ROLE_ADMIN"))) {
-            return "admin/partie/formulaire";
+            return "admin/entite/formulaire";
         } else if (auth.getAuthorities().stream().anyMatch(a -> a.getAuthority().equals("ROLE_MJ"))) {
-            return "front/gm/partie-formulaire";
+            return "front/gm/entite-formulaire";
         }
         return "error/403";
     }
 
     // Ajout
-    @PostMapping({"/admin/parties/ajouter", "/parties/gm/ajouter"})
-    public String enregistrer(@ModelAttribute Partie partie, Authentication auth) {
+    @PostMapping({"/admin/entites/ajouter", "/entites/gm/ajouter"})
+    public String enregistrer(@ModelAttribute Entite entite, Authentication auth) {
         if (auth.getAuthorities().stream().anyMatch(a -> a.getAuthority().equals("ROLE_ADMIN"))) {
-            partieService.save(partie);
-            return "redirect:/admin/parties";
+            entiteService.save(entite);
+            return "redirect:/admin/entites";
         } else if (auth.getAuthorities().stream().anyMatch(a -> a.getAuthority().equals("ROLE_MJ"))) {
             String username = auth.getName();
-            partie.setMj(utilisateurService.findByPseudo(username).orElse(null));
-            partieService.save(partie);
-            return "redirect:/front/gm/dashboard?tab=games";
+            entite.setCreateur(utilisateurService.findByPseudo(username).orElse(null));
+            entiteService.save(entite);
+            return "redirect:/front/gm/dashboard?tab=entities";
         }
         return "error/403";
     }
 
     // Formulaire édition
-    @GetMapping({"/admin/parties/editer/{id}", "/parties/gm/editer/{id}"})
+    @GetMapping({"/admin/entites/editer/{id}", "/entites/gm/editer/{id}"})
     public String formulaireEdition(@PathVariable UUID id, Model model, Authentication auth) {
-        Partie partie = partieService.findById(id).orElseThrow();
-        model.addAttribute("partie", partie);
+        Entite entite = entiteService.findById(id).orElseThrow();
+        model.addAttribute("entite", entite);
         if (auth.getAuthorities().stream().anyMatch(a -> a.getAuthority().equals("ROLE_ADMIN"))) {
-            return "admin/partie/formulaire";
+            return "admin/entite/formulaire";
         } else if (auth.getAuthorities().stream().anyMatch(a -> a.getAuthority().equals("ROLE_MJ"))) {
-            return "front/gm/partie-formulaire";
+            return "front/gm/entite-formulaire";
         }
         return "error/403";
     }
 
     // Edition
-    @PostMapping({"/admin/parties/editer/{id}", "/parties/gm/editer/{id}"})
-    public String modifier(@PathVariable UUID id, @ModelAttribute Partie partie, Authentication auth) {
-        partie.setId(id);
+    @PostMapping({"/admin/entites/editer/{id}", "/entites/gm/editer/{id}"})
+    public String modifier(@PathVariable UUID id, @ModelAttribute Entite entite, Authentication auth) {
+        entite.setId(id);
         if (auth.getAuthorities().stream().anyMatch(a -> a.getAuthority().equals("ROLE_ADMIN"))) {
-            partieService.save(partie);
-            return "redirect:/admin/parties";
+            entiteService.save(entite);
+            return "redirect:/admin/entites";
         } else if (auth.getAuthorities().stream().anyMatch(a -> a.getAuthority().equals("ROLE_MJ"))) {
             String username = auth.getName();
-            partie.setMj(utilisateurService.findByPseudo(username).orElse(null));
-            partieService.save(partie);
-            return "redirect:/front/gm/dashboard?tab=games";
+            entite.setCreateur(utilisateurService.findByPseudo(username).orElse(null));
+            entiteService.save(entite);
+            return "redirect:/front/gm/dashboard?tab=entities";
         }
         return "error/403";
     }
 
     // Suppression
-    @GetMapping({"/admin/parties/supprimer/{id}", "/parties/gm/supprimer/{id}"})
+    @GetMapping({"/admin/entites/supprimer/{id}", "/entites/gm/supprimer/{id}"})
     public String supprimer(@PathVariable UUID id, Authentication auth) {
         if (auth.getAuthorities().stream().anyMatch(a -> a.getAuthority().equals("ROLE_ADMIN"))) {
-            partieService.deleteById(id);
-            return "redirect:/admin/parties";
+            entiteService.deleteById(id);
+            return "redirect:/admin/entites";
         } else if (auth.getAuthorities().stream().anyMatch(a -> a.getAuthority().equals("ROLE_MJ"))) {
-            partieService.deleteById(id);
-            return "redirect:/front/gm/dashboard?tab=games";
+            entiteService.deleteById(id);
+            return "redirect:/front/gm/dashboard?tab=entities";
         }
         return "error/403";
     }
