@@ -19,7 +19,7 @@
                 <div id="stats-container">
                     <div class="stat-block">
                         <label>Nom : <input type="text" name="stats[0].nom" /></label>
-                        <label>Valeur : <input type="number" name="stats[0].valeur" required/></label>
+                        <label>Valeur : <input type="text" name="stats[0].valeur" required/></label>
                         <button type="button" class="delete-stat-btn btn btn-danger" onclick="deleteStat(this)">Supprimer</button>
                     </div>
                 </div>
@@ -46,7 +46,7 @@
                     if (container.children.length >= 10) return;
                     const block = document.createElement('div');
                     block.className = 'stat-block';
-                    block.innerHTML = `<label>Nom : <input type="text" name="stats[${statIndex}].nom" /></label> <label>Valeur : <input type="number" name="stats[${statIndex}].valeur" required/></label> <button type="button" class="delete-stat-btn btn btn-danger" onclick="deleteStat(this)">Supprimer</button>`;
+                    block.innerHTML = `<label>Nom : <input type="text" name="stats[${statIndex}].nom" /></label> <label>Valeur : <input type="text" name="stats[${statIndex}].valeur" required/></label> <button type="button" class="delete-stat-btn btn btn-danger" onclick="deleteStat(this)">Supprimer</button>`;
                     container.appendChild(block);
                     statIndex++;
                     updateAddButtonVisibility();

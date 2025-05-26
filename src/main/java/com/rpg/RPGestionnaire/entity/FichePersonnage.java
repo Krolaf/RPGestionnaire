@@ -19,8 +19,10 @@ public class FichePersonnage {
     private Date dateCreation;
     @ManyToOne
     private Utilisateur utilisateur;
-    @OneToMany(mappedBy = "fichePersonnage")
-    private List<StatJoueur> stats;
+    @ManyToOne
+    private Partie partie;
+    @OneToMany(mappedBy = "fichePersonnage", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Stat> stats;
 
     // Getters et Setters
     public UUID getId() {
@@ -55,11 +57,19 @@ public class FichePersonnage {
         this.utilisateur = utilisateur;
     }
 
-    public List<StatJoueur> getStats() {
+    public Partie getPartie() {
+        return partie;
+    }
+
+    public void setPartie(Partie partie) {
+        this.partie = partie;
+    }
+
+    public List<Stat> getStats() {
         return stats;
     }
 
-    public void setStats(List<StatJoueur> stats) {
+    public void setStats(List<Stat> stats) {
         this.stats = stats;
     }
 } 

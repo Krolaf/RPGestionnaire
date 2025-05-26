@@ -30,4 +30,8 @@ public class EntiteService {
     public List<Entite> findByGmUsername(String username) {
         return entiteRepository.findByCreateurPseudo(username);
     }
+
+    public List<Entite> findByPartieId(UUID partieId) {
+        return entiteRepository.findByPartieId(partieId);
+    }
 } 

@@ -30,4 +30,8 @@ public class FichePersonnageService {
     public List<FichePersonnage> findByUtilisateurPseudo(String pseudo) {
         return fichePersonnageRepository.findByUtilisateur_Pseudo(pseudo);
     }
+
+    public List<FichePersonnage> findByPartieId(UUID partieId) {
+        return fichePersonnageRepository.findByPartie_Id(partieId);
+    }
 } 

@@ -64,7 +64,11 @@
                     <div class="character-sheet">
                         <h4 th:text="${character.name}">Nom du personnage</h4>
                         <div class="character-stats">
-                            <!-- Stats du personnage -->
+                            <ul>
+                                <li th:each="stat : ${character.stats}">
+                                    <span th:text="${stat.nom}"></span> : <span th:text="${stat.valeur}"></span>
+                                </li>
+                            </ul>
                         </div>
                     </div>
                 </div>

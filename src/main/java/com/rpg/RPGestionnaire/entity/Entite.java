@@ -20,8 +20,8 @@ public class Entite {
     private Partie partie;
     @ManyToOne
     private Utilisateur createur;
-    @OneToMany(mappedBy = "entite")
-    private List<StatEntite> stats;
+    @OneToMany(mappedBy = "entite", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Stat> stats;
 
     // Getters et Setters
     public UUID getId() {
@@ -72,11 +72,11 @@ public class Entite {
         this.createur = createur;
     }
 
-    public List<StatEntite> getStats() {
+    public List<Stat> getStats() {
         return stats;
     }
 
-    public void setStats(List<StatEntite> stats) {
+    public void setStats(List<Stat> stats) {
         this.stats = stats;
     }
 } 

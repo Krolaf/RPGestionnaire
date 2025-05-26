@@ -7,4 +7,5 @@ import java.util.List;
 
 public interface EntiteRepository extends JpaRepository<Entite, UUID> {
     List<Entite> findByCreateurPseudo(String pseudo);
+    List<Entite> findByPartieId(UUID partieId);
 } 
