@@ -14,9 +14,12 @@ public class FrontController {
     public Object accueil() {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         if (auth != null && auth.isAuthenticated()) {
+            boolean isAdmin = auth.getAuthorities().stream().anyMatch(a -> a.getAuthority().equals("ROLE_ADMIN"));
             boolean isMJ = auth.getAuthorities().stream().anyMatch(a -> a.getAuthority().equals("ROLE_MJ"));
             boolean isJoueur = auth.getAuthorities().stream().anyMatch(a -> a.getAuthority().equals("ROLE_JOUEUR"));
-            if (isMJ) {
+            if (isAdmin) {
+                return new RedirectView("/admin");
+            } else if (isMJ) {
                 return new RedirectView("/front/gm/dashboard");
             } else if (isJoueur) {
                 return new RedirectView("/front/player/dashboard");

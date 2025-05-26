@@ -22,9 +22,9 @@ public class SecurityConfig {
         http
             .authorizeHttpRequests(auth -> auth
                 .requestMatchers("/register", "/login", "/css/**", "/js/**", "/images/**").permitAll()
-                .requestMatchers("/admin/**").hasRole("Admin")
-                .requestMatchers("/front/gm/**").hasRole("MJ")
-                .requestMatchers("/front/player/**").hasRole("JOUEUR")
+                .requestMatchers("/admin/**").hasAuthority("ROLE_ADMIN")
+                .requestMatchers("/front/gm/**").hasAuthority("ROLE_MJ")
+                .requestMatchers("/front/player/**").hasAuthority("ROLE_JOUEUR")
                 .anyRequest().authenticated()
             )
             .formLogin(form -> form
