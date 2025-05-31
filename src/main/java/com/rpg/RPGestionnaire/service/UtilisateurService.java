@@ -9,6 +9,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.Collections;
 import java.util.List;
@@ -18,13 +19,11 @@ import java.util.UUID;
 @Service
 public class UtilisateurService implements UserDetailsService {
 
-    private final UtilisateurRepository utilisateurRepository;
-    private final PasswordEncoder passwordEncoder;
+    @Autowired
+    private UtilisateurRepository utilisateurRepository;
 
-    public UtilisateurService(UtilisateurRepository utilisateurRepository, PasswordEncoder passwordEncoder) {
-        this.utilisateurRepository = utilisateurRepository;
-        this.passwordEncoder = passwordEncoder;
-    }
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
@@ -52,11 +51,8 @@ public class UtilisateurService implements UserDetailsService {
     }
 
     public Utilisateur save(Utilisateur utilisateur) {
-        if (utilisateur.getPasswordHash() != null) {
-            String pwd = utilisateur.getPasswordHash();
-            if (!pwd.startsWith("$2a$") && !pwd.startsWith("$2b$") && !pwd.startsWith("$2y$")) {
-                utilisateur.setPasswordHash(passwordEncoder.encode(pwd));
-            }
+        if (utilisateur.getPasswordHash() != null && !utilisateur.getPasswordHash().startsWith("$2a$")) {
+            utilisateur.setPasswordHash(passwordEncoder.encode(utilisateur.getPasswordHash()));
         }
         return utilisateurRepository.save(utilisateur);
     }
@@ -75,5 +71,9 @@ public class UtilisateurService implements UserDetailsService {
 
     public Optional<Utilisateur> findByPseudo(String pseudo) {
         return utilisateurRepository.findByPseudo(pseudo);
+    }
+
+    public boolean verifyPassword(Utilisateur utilisateur, String rawPassword) {
+        return passwordEncoder.matches(rawPassword, utilisateur.getPasswordHash());
     }
 } 
